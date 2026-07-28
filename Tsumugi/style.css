@@ -1,0 +1,178 @@
+:root {
+    color-scheme: light;
+    --wabi-bg: #F4F0EA;
+    --wabi-surface: #EAE3D6;
+    --wabi-element: #E0D7C6;
+    --wabi-border: #CFC5B3;
+    --wabi-text: #363330;
+    --wabi-muted: #7A7369;
+    --wabi-accent: #B3654D;
+    --wabi-accent-hover: #96513C;
+}
+
+/* Dark theme — same warm, earthy wabi-sabi palette, inverted rather than swapped for a cold
+   blue-black, so it still feels like the same app at night. Toggled via a `.dark` class on
+   <html>, applied by a small no-flash script in the document head before first paint. */
+html.dark {
+    color-scheme: dark;
+    --wabi-bg: #211E1A;
+    --wabi-surface: #2B2823;
+    --wabi-element: #38342D;
+    --wabi-border: #4A453C;
+    --wabi-text: #EDE6DA;
+    --wabi-muted: #A69C8C;
+    --wabi-accent: #C97A5C;
+    --wabi-accent-hover: #D98F6E;
+}
+
+body {
+    background-color: var(--wabi-bg);
+    color: var(--wabi-text);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* Subtle texture for tactile organic feel */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* Anti-cheat blur transition */
+.translation-text {
+    filter: blur(6px);
+    transition: filter 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease-in-out;
+    opacity: 0.5;
+    user-select: none;
+}
+
+.translation-container:hover .translation-text,
+.translation-container.revealed .translation-text {
+    filter: blur(0);
+    opacity: 1;
+    user-select: auto;
+}
+
+.translation-hint {
+    transition: opacity 0.4s ease-in-out;
+}
+
+.translation-container:hover .translation-hint,
+.translation-container.revealed .translation-hint {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Pulse animation for loading state */
+@keyframes earthy-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.97); }
+}
+.animate-subtle-pulse {
+    animation: earthy-pulse 2.5s ease-in-out infinite;
+}
+
+/* Success flash — briefly rings a card in the accent color right after a weave completes,
+   so a successful result reads as visually distinct from an error toast. */
+@keyframes weave-success-ring {
+    0% { box-shadow: 0 0 0 0 var(--wabi-accent); }
+    100% { box-shadow: 0 0 0 6px transparent; }
+}
+.animate-success-flash {
+    animation: weave-success-ring 0.7s ease-out;
+}
+
+/* Hide scrollbar for textarea */
+textarea::-webkit-scrollbar {
+    width: 6px;
+}
+textarea::-webkit-scrollbar-track {
+    background: transparent;
+}
+textarea::-webkit-scrollbar-thumb {
+    background-color: var(--wabi-border);
+    border-radius: 10px;
+}
+
+/* Hide scrollbar for Vault chips container */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* ============================================================
+   Narrator Voice <select> theming
+   ------------------------------------------------------------
+   Baseline (all browsers): strips native OS chrome with
+   appearance:none and paints a fully OPAQUE app-colored
+   background. The washed-out white-on-white bug in dark mode
+   happened because the native control's own opaque backplate
+   was showing through a semi-transparent author background —
+   going fully opaque here fixes it regardless of appearance
+   support. A hand-drawn chevron (swapped per theme) replaces
+   the native arrow that appearance:none removes.
+
+   Enhanced (Chrome 135+, Safari 27+): opts into the
+   appearance:base-select API, which hands the OPEN dropdown
+   panel and its options over to CSS too — previously only the
+   OS could paint that part, which is what still looked like
+   a native Windows menu.
+   ============================================================ */
+.themed-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: var(--wabi-surface);
+    color: var(--wabi-text);
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    background-size: 0.9rem;
+    padding-right: 2.25rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237A7369' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+html.dark .themed-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A69C8C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+.themed-select option {
+    background-color: var(--wabi-surface);
+    color: var(--wabi-text);
+}
+
+@supports (appearance: base-select) {
+    .themed-select,
+    .themed-select::picker(select) {
+        appearance: base-select;
+    }
+    .themed-select {
+        background-image: none; /* the native ::picker-icon below replaces the hand-drawn arrow */
+        padding-right: 1rem;
+    }
+    .themed-select::picker(select) {
+        background-color: var(--wabi-surface);
+        color: var(--wabi-text);
+        border: 1px solid var(--wabi-border);
+        border-radius: 0.75rem;
+        padding: 0.375rem;
+        margin-top: 0.375rem;
+        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.35);
+    }
+    .themed-select option {
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
+        background-color: transparent;
+    }
+    .themed-select option:hover,
+    .themed-select option:focus {
+        background-color: var(--wabi-element);
+    }
+    .themed-select option:checked {
+        background-color: var(--wabi-accent);
+        color: #F4F0EA;
+    }
+    .themed-select::picker-icon {
+        color: var(--wabi-muted);
+    }
+    .themed-select::checkmark {
+        color: var(--wabi-accent);
+    }
+}
