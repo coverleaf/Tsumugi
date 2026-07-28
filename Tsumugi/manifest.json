@@ -1,0 +1,31 @@
+{
+  "name": "Tsumugi — Weave Your Vocabulary",
+  "short_name": "Tsumugi",
+  "description": "Turn your Japanese vocabulary into sentences built only from words you already know.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F4F0EA",
+  "theme_color": "#B3654D",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
