@@ -35,10 +35,10 @@ It's a small, focused tool built around one idea: **comprehensible input, guaran
 ## Features
 
 **The core loop**
-- 🧵 **Weave** — turns up to 10 words into a full breakdown: readings, meaning, a mnemonic, part of speech, and (for verbs/i-adjectives) a polite-form conjugation table
+- **Weave** — turns up to 10 words into a full breakdown: readings, meaning, a mnemonic, part of speech, and (for verbs/i-adjectives) a polite-form conjugation table
 - **The Weave** — four example sentences built only from your words, each with a blurred romaji / English / "vibe" reveal — a small anti-cheat nudge to try reading the Japanese yourself before peeking
 - **The Micro-Story** — a short story tying all your words together
-- 🔊 Text-to-speech playback, with voice and speed selection in Settings
+- Text-to-speech playback, with voice and speed selection in Settings
 
 **What makes repeated use worthwhile**
 - **Bridge Mode** — optionally blends a few already-learned Vault words in alongside new ones, so sentences get richer and more natural the longer you use the app, instead of staying capped at "beginner noun + copula" forever
