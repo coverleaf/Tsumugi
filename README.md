@@ -107,4 +107,4 @@ Ideas that didn't make the cut for this version — each is a real feature, just
 
 ## License
 
-[MIT](LICENSE) — or swap in whatever you prefer.
+[MIT](LICENSE)
